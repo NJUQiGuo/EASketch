@@ -18,6 +18,8 @@ hopping: Structure of each layer in Multi-layer
 * easketch_with_compress - EASketch with the time-based compression
 
 PCMSketch: Atomic sketch of PPCM
+
 DynamicSketch: Atomic sketch of EASketch
+
 DynamicSketchWithCompress: Atomic sketch of EASketch with the time-based compression
 
