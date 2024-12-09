@@ -85,60 +85,6 @@ int hopping_cm::query(int l, int r, elem_t e) const {
 }
 
 
-hopping_cnt::hopping_cnt(size_t memory, int size, int k, int period) : size(size), k(k), period(period) {
-	cnt = new countsk*[size];
-	//printf("hop: %d %d\n", size, k);
-	for (int i = 0; i < size; ++i)
-		cnt[i] = new countsk(memory / size, 1);
-	last_win = 0;
-	counter = 0;
-}
-
-hopping_cnt::~hopping_cnt() {
-	for (int i = 0; i < size; ++i)
-		delete cnt[i];
-	delete[] cnt;
-}
-
-void hopping_cnt::new_win() {
-	if (counter % period == 0) {
-		
-		last_win++;
-		if (last_win>=size)
-		{
-			printf("lasx_win:%d,size:%d, clear:%d",last_win,size,last_win%size);
-		}
-		cnt[last_win % size]->clear();
-	}
-	counter++;
-}
-
-void hopping_cnt::ins_latest(elem_t e, int delta) {
-	for (int i = 0; i < k; ++i) cnt[(last_win + i) % size]->add(e, last_win, delta);
-}
-#include <cassert>
-int hopping_cnt::query(int win, elem_t e) const {
-	std::vector<int> res;
-	for (int i = win; i < win + k; ++i)
-		if (i > last_win + k - 1 - size) res.push_back(cnt[i % size]->query(e, win));
-	if (res.size()==0)
-	{
-		return 0;
-	}
-	
-	// assert(res.size() > 0);
-	std::sort(res.begin(), res.end());
-	if (res.size() % 2) return res[res.size()/2];
-	else return (res[res.size()/2] + res[res.size()/2-1])/2;
-}
-
-int hopping_cnt::query(int l, int r, elem_t e) const {
-	int sum = 0;
-	for (int i = l; i <= r; ++i) sum += query(i, e);
-	return sum;
-}
-
-
 pcm1_base::pcm1_base(size_t memory, int size, int k, int period): size(size), k(k), period(period)
 {
 	sketch_size = memory/size;
