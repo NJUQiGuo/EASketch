@@ -1,21 +1,20 @@
-# HoppingSketch
-HoppingSketch is the first sketch to implement temporal membership queries for sliding windows, and is a general and efficient data stream processing framework that can implement different tasks through different atomic sketches (Bloom filter, CM sketch, CU sketch, Count sketch, etc.). This repostory contains all the codes related to the manuscript submitted to IEEE TKDE.
-# Files
-bloom_filter - Bloom Filter  
+# EASketch
+EASketch is an elastic and adaptive sketch tailored for temporal frequency queries, providing both efficient storage and high accuracy over extended time periods. EASketch dynamically adapts to changing data patterns and optimizing memory utilization.  This repostory contains all the codes related to the manuscript submitted to IEEE ICDE.
+# Files 
 cmsketch - CM sketch  
 cusketch - CU sketch  
 countsk - Count sketch  
-file_reader - Dataset Reader  
+hpwin_sketch: Virtual base class 
+pbf: Multi-layer Structure
+* multi_layer1 - multi-layer structure for PCM, PCM-H
+* multi_layer2 - multi-layer structure for PPCM, EASketch
+hopping: Structure of each layer in Multi-layer
+* pcm1_base - PCM  
+* hopping_cm - PCM-H
+* pyramid_pcm - PPCM
+* easketch - EASketch
+* easketch_with_compress - EASketch with the time-based compression
+PCMSketch: Atomic sketch of PPCM
+DynamicSketch: Atomic sketch of EASketch
+DynamicSketchWithCompress: Atomic sketch of EASketch with the time-based compression
 
-hpwin_sketch: Virtual base class for HoppingSketch  
-
-Hop Basic Sketch: Baseline for HoppingSketch  
-* hop_basic - Bloom Filter  
-* hpbsc_cm - CM sketch  
-* hpbsc_csk - Count sketch  
-* hpbsc_cu - CU sketch  
-
-hopping - HoppingSketch (Our Algorithm)  
-pbf - Persistent Bloom Filter & Persistnet CM&Count&CU sketch (PCM, PC, PCU in paper)  
-test - Test functions  
-utils - Bitset & Hashmap  
