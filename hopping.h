@@ -8,19 +8,7 @@
 #include "DynamicSketchWithCompress.h"
 
 
-class hopping_cnt : hpwin_sketch<int> {
-public:
-	hopping_cnt(size_t memory, int size, int k, int per = 1);
-	~hopping_cnt();
-	void new_win();
-	void ins_latest(elem_t e, int delta = 1);
-	int query(int l, int r, elem_t e) const;
-	int query(int win, elem_t e) const;
 
-private:
-	countsk **cnt;
-	int size, k, last_win, period, counter;
-};
 
 class hopping_cm : hpwin_sketch<int> {
 public:
