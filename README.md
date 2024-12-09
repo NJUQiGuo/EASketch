@@ -1,9 +1,13 @@
 # EASketch
 EASketch is an elastic and adaptive sketch tailored for temporal frequency queries, providing both efficient storage and high accuracy over extended time periods. EASketch dynamically adapts to changing data patterns and optimizing memory utilization.  This repostory contains all the codes related to the manuscript submitted to IEEE ICDE.
+
 # Files 
 cmsketch - CM sketch  
+
 cusketch - CU sketch  
+
 countsk - Count sketch  
+
 hpwin_sketch: Virtual base class 
 
 pbf: Multi-layer Structure
