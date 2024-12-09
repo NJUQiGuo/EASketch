@@ -365,7 +365,7 @@ void test_are_pyramid_versus_query_length_five_min(){
 		std::ifstream inputFile("dataset/testdataset_inrange.txt");
 		std::string line;
 		size_t sketch_value;
-		auto pyramid_pcm1 = new pyramidcm1<pyramid_pcm>(MB(i),k2);
+		auto pyramid_pcm1 = new multi_layer2<pyramid_pcm>(MB(i),k2);
 		ds = (hpwin_sketch<int>*) pyramid_pcm1;
 		build_sketch(ds);		
 		if (!inputFile.is_open()) {
@@ -438,7 +438,7 @@ void test_are_pyramid_versus_query_length_edgar(){
 		std::ifstream inputFile("dataset/test_dataset_edgar.txt");
 		std::string line;
 		size_t sketch_value;
-		auto pyramid_pcm1 = new pyramidcm1<pyramid_pcm>(MB(i),k2);
+		auto pyramid_pcm1 = new multi_layer2<pyramid_pcm>(MB(i),k2);
 		ds = (hpwin_sketch<int>*) pyramid_pcm1;
 		build_sketch(ds);		
 		if (!inputFile.is_open()) {
@@ -534,7 +534,7 @@ void test_are_dynamic_versus_query_length_edgar(){
 		std::ifstream inputFile("dataset/test_dataset_edgar.txt");
 		std::string line;
 		size_t sketch_value;
-		auto dynamic1 = new pyramidcm1<easketch>(MB(i), k2);
+		auto dynamic1 = new multi_layer2<easketch>(MB(i), k2);
 		ds = (hpwin_sketch<int>*) dynamic1;
 		build_sketch(ds);		
 		if (!inputFile.is_open()) {
@@ -602,7 +602,7 @@ void test_are_pcm_sw_versus_query_length_edgar(){
 		std::ifstream inputFile("dataset/test_dataset_edgar.txt");
 		std::string line;
 		size_t sketch_value;
-		auto pcm_sw = new pcnt1<hopping_cm>(MB(i), k2);
+		auto pcm_sw = new multi_layer1<hopping_cm>(MB(i), k2);
 		ds = (hpwin_sketch<int>*) pcm_sw;
 		build_sketch(ds);		
 		if (!inputFile.is_open()) {
@@ -710,7 +710,7 @@ void test_are_pcm_versus_query_length_edgar(){
 		std::ifstream inputFile("dataset/test_dataset_edgar.txt");
 		std::string line;
 		size_t sketch_value;
-		auto pcm1 = new hfsketch1<pcm1_base>(MB(i), k2);
+		auto pcm1 = new multi_layer1<pcm1_base>(MB(i), k2);
 		ds = (hpwin_sketch<int>*) pcm1;
 		build_sketch(ds);		
 		if (!inputFile.is_open()) {
@@ -805,7 +805,7 @@ void test_are_dynamic_versus_query_length_five_min(){
 		std::ifstream inputFile("dataset/testdataset_inrange.txt");
 		std::string line;
 		size_t sketch_value;
-		auto dynamic1 = new pyramidcm1<easketch>(MB(i), k2);
+		auto dynamic1 = new multi_layer2<easketch>(MB(i), k2);
 		ds = (hpwin_sketch<int>*) dynamic1;
 		build_sketch(ds);		
 		if (!inputFile.is_open()) {
@@ -877,7 +877,7 @@ void test_are_dynamic_with_compress_versus_query_length_five_min(){
 		std::ifstream inputFile("dataset/testdataset_inrange.txt");
 		std::string line;
 		size_t sketch_value;
-		auto dynamic1 = new pyramidcm1<easketch_with_compress>(MB(i), k2);
+		auto dynamic1 = new multi_layer2<easketch_with_compress>(MB(i), k2);
 		ds = (hpwin_sketch<int>*) dynamic1;
 		build_sketch(ds);
 		size_t memory = dynamic1->memory();		
@@ -952,7 +952,7 @@ void test_are_pcm_sw_versus_query_length_five_min(){
 		std::ifstream inputFile("dataset/testdataset_inrange.txt");
 		std::string line;
 		size_t sketch_value;
-		auto pcm_sw = new pcnt1<hopping_cm>(MB(i), k2);
+		auto pcm_sw = new multi_layer1<hopping_cm>(MB(i), k2);
 		ds = (hpwin_sketch<int>*) pcm_sw;
 		build_sketch(ds);		
 		if (!inputFile.is_open()) {
@@ -961,43 +961,6 @@ void test_are_pcm_sw_versus_query_length_five_min(){
 		}
 		tot = 0;
 		sum=0.0, sumaae=0.0, are=0.0;
-		
-		
-		// while (std::getline(inputFile, line))
-		// {
-		// 	std::istringstream iss(line);
-		// 	iss>>start_time>>end_time>>random_element>>real_value;
-		// 	sketch_value = ds->query(start_time, end_time,random_element);
-		// 	printf("%d %d %ld %d %d\n",start_time, end_time, random_element, real_value,sketch_value);
-		// 	// fprintf(result_file,"%d %d %ld %d %d\n",start_time, end_time, random_element, real_value,sketch_value);
-		// 	// if (real_value==0)
-		// 	// {
-		// 	// 	sum += fabs(sketch_value - real_value) *1e6;
-		// 	// }else{
-		// 	// 	sum += fabs(sketch_value - real_value) / real_value;
-		// 	// }
-		// 	if (sketch_value>real_value)
-		// 	{
-		// 		sum += (sketch_value - real_value) / real_value;
-		// 		sumaae += sketch_value-real_value;
-		// 	}else{
-		// 		sum += (real_value - sketch_value) / real_value;
-		// 		sumaae += real_value - sketch_value;
-		// 	}
-			
-		// 	// sum += fabs(double(sketch_value - real_value)) / real_value;
-		// 	// sumaae += fabs(double(sketch_value - real_value));
-		// 	tot++;
-		// 	// fprintf(result_file,"sketch_value:%d,real_value:%d,dis:%lf,sumaae:%lf,are now:%lf.\n",
-		// 	// 					sketch_value,real_value,fabs(sketch_value-real_value),sumaae,sum/tot);
-		// }
-		// are = sum / tot;
-		
-		// // fprintf(result_file,"pcm_sw sketch memory=%d MB, Ratio:%f, are=%f.\n",i,1.,are);
-		// // size_t memory = dynamic1->memory();
-		// printf("pcm_sw memory=%d MB, Ratio:%f, are=%f.\n",i,1.0,are);
-		// fprintf(result_file,"pcm_sw memory=%d MB, Ratio:%f, are=%f.\n",i,1.0,are);
-
 
 		int count = 0;
 		while (std::getline(inputFile, line))
@@ -1062,7 +1025,7 @@ void test_are_pcm_versus_query_length_five_min(){
 		std::ifstream inputFile("dataset/testdataset_inrange.txt");
 		std::string line;
 		size_t sketch_value;
-		auto pcm1 = new hfsketch1<pcm1_base>(MB(i), k2);
+		auto pcm1 = new multi_layer1<pcm1_base>(MB(i), k2);
 		ds = (hpwin_sketch<int>*) pcm1;
 		build_sketch(ds);		
 		if (!inputFile.is_open()) {
